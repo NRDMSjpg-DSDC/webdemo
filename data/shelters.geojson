@@ -1,0 +1,85 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Haldibari High School",
+        "capacity": 2500,
+        "available": 1100,
+        "type": "Evacuation Centre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.756,
+          26.355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mekhliganj Community Hall",
+        "capacity": 1500,
+        "available": 950,
+        "type": "Evacuation Centre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.806,
+          26.326
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Maynaguri High School",
+        "capacity": 1800,
+        "available": 1300,
+        "type": "Evacuation Centre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.785,
+          26.411
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Haldibari College Shelter",
+        "capacity": 1200,
+        "available": 800,
+        "type": "Evacuation Centre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.745,
+          26.365
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Shelter",
+        "capacity": 1000,
+        "available": 600,
+        "type": "Evacuation Centre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.815,
+          26.355
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Recommended Evacuation Route",
+        "distance_km": 4.2,
+        "time_min": 12
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            88.735,
+            26.345
+          ],
+          [
+            88.745,
+            26.35
+          ],
+          [
+            88.752,
+            26.354
+          ],
+          [
+            88.756,
+            26.355
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Recommended Route Mekhliganj",
+        "distance_km": 3.6,
+        "time_min": 11
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            88.79,
+            26.32
+          ],
+          [
+            88.8,
+            26.323
+          ],
+          [
+            88.806,
+            26.326
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Recommended Route Maynaguri",
+        "distance_km": 2.8,
+        "time_min": 8
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            88.775,
+            26.405
+          ],
+          [
+            88.78,
+            26.409
+          ],
+          [
+            88.785,
+            26.411
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Haldibari Flood Risk Zone",
+        "risk": "High",
+        "population": 2170
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.73,
+              26.34
+            ],
+            [
+              88.77,
+              26.34
+            ],
+            [
+              88.78,
+              26.37
+            ],
+            [
+              88.74,
+              26.38
+            ],
+            [
+              88.73,
+              26.34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mekhliganj Flood Risk Zone",
+        "risk": "Medium",
+        "population": 1480
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.78,
+              26.31
+            ],
+            [
+              88.82,
+              26.31
+            ],
+            [
+              88.83,
+              26.34
+            ],
+            [
+              88.79,
+              26.35
+            ],
+            [
+              88.78,
+              26.31
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Maynaguri Waterlogging Zone",
+        "risk": "High",
+        "population": 860
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88.76,
+              26.39
+            ],
+            [
+              88.8,
+              26.39
+            ],
+            [
+              88.81,
+              26.42
+            ],
+            [
+              88.77,
+              26.43
+            ],
+            [
+              88.76,
+              26.39
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
