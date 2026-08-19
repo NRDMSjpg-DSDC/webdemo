@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Disaster Management &amp; Evacuation WebGIS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/ol@10.6.1/ol.css"
+      rel="stylesheet"
+    />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div
+      aria-labelledby="loginTitle"
+      aria-modal="true"
+      class="login-overlay"
+      id="loginOverlay"
+      role="dialog"
+    >
+      <div class="login-card">
+        <div class="login-brand">
+          <div class="login-logo">GIS</div>
+          <div>
+            <div class="login-title" id="loginTitle">
+              Disaster Management WebGIS
+            </div>
+            <div class="login-subtitle">Secure Portal Access</div>
+          </div>
+        </div>
+        <form autocomplete="off" id="loginForm">
+          <label for="loginUsername"> Username </label>
+          <input
+            autocomplete="username"
+            id="loginUsername"
+            placeholder="Enter username"
+            required=""
+            type="text"
+          />
+          <label for="loginPassword"> Password </label>
+          <input
+            autocomplete="current-password"
+            id="loginPassword"
+            placeholder="Enter password"
+            required=""
+            type="password"
+          />
+          <label for="loginUserType"> User Type </label>
+          <select id="loginUserType" required="">
+            <option disabled="" selected="" value="">Select user type</option>
+            <option value="ADMIN">Admin</option>
+            <option value="ANALYST">Analyst</option>
+            <option value="USER">User</option>
+          </select>
+          <button class="login-submit" type="submit">Login</button>
+          <div class="login-error" id="loginError" role="alert"></div>
+        </form>
+      </div>
+    </div>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">DM</div>
+        <div>
+          <h1>Disaster Management &amp; Evacuation WebGIS</h1>
+          <p>Emergency Planning &amp; Spatial Decision Support System</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="status-dot"> </span>
+        <span> System Online </span>
+        <button class="header-btn" id="downloadMapBtn">Download Map</button>
+      </div>
+    </header>
+    <main class="workspace">
+      <aside class="sidebar" id="sidebar">
+        <button
+          aria-expanded="true"
+          aria-label="Collapse left menu"
+          class="sidebar-toggle"
+          id="sidebarToggle"
+          title="Collapse left menu"
+          type="button"
+        >
+          &lsaquo;
+        </button>
+        <div class="panel">
+          <div class="panel-title">Map Layers</div>
+          <label>
+            <input checked="" data-layer="risk" type="checkbox" />
+            Disaster Risk Zones
+          </label>
+          <label>
+            <input checked="" data-layer="shelters" type="checkbox" />
+            Evacuation Centres
+          </label>
+          <label>
+            <input checked="" data-layer="routes" type="checkbox" />
+            Evacuation Routes
+          </label>
+          <label>
+            <input checked="" data-layer="roads" type="checkbox" />
+            Road Network
+          </label>
+          <label>
+            <input checked="" data-layer="facilities" type="checkbox" />
+            Critical Facilities
+          </label>
+          <label>
+            <input checked="" data-layer="gramPanchayat" type="checkbox" />
+            Gram Panchayat
+          </label>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Emergency Analysis</div>
+          <label for="locationSelect"> Affected Location </label>
+          <select id="locationSelect">
+            <option value="">Select affected area</option>
+            <option value="Haldibari">Haldibari Flood Zone</option>
+            <option value="Mekhliganj">Mekhliganj Flood Zone</option>
+            <option value="Maynaguri">Maynaguri Waterlogging Zone</option>
+          </select>
+          <button class="primary" id="analyzeBtn">
+            Find Safe Evacuation Plan
+          </button>
+          <div class="analysis-result" id="analysisResult">
+            Select an affected area to calculate the evacuation plan.
+          </div>
+        </div>
+      </aside>
+      <section class="map-area">
+        <button
+          aria-label="Open left menu"
+          class="sidebar-open-btn"
+          id="sidebarOpenBtn"
+          title="Open left menu"
+          type="button"
+        >
+          &rsaquo;
+        </button>
+        <div id="map"></div>
+        <div aria-expanded="false" class="basemap-control" id="basemapControl">
+          <button
+            aria-label="Basemap"
+            class="basemap-icon"
+            id="basemapIcon"
+            title="Basemap"
+          >
+            <span class="sr-only"> Basemap </span>
+          </button>
+          <div class="basemap-menu" id="basemapMenu">
+            <div class="basemap-title">Basemap</div>
+            <label>
+              <input checked="" name="basemap" type="radio" value="osm" />
+              OpenStreetMap
+            </label>
+            <label>
+              <input name="basemap" type="radio" value="satellite" />
+              Satellite
+            </label>
+          </div>
+        </div>
+        <div class="map-search">
+          <input id="searchBox" placeholder="Search location..." />
+          <button id="searchBtn">Search</button>
+        </div>
+        <div class="map-tools-right">
+          <div class="floating-panel">
+            <div class="floating-title">Map Tools</div>
+            <div class="tool-grid">
+              <button id="homeBtn">Home</button>
+              <button id="locateBtn">Locate</button>
+            </div>
+          </div>
+          <div class="floating-panel location-filter-panel">
+            <div class="floating-title">Location Selection</div>
+            <label for="blockSelect"> Block </label>
+            <select id="blockSelect">
+              <option value="">Select Block</option>
+            </select>
+            <label for="gpSelect"> Gram Panchayat </label>
+            <select id="gpSelect">
+              <option value="">Select Gram Panchayat</option>
+            </select>
+          </div>
+          <div class="floating-panel legend-panel">
+            <div class="floating-title legend-title">
+              <span> Legend </span>
+              <button
+                aria-expanded="false"
+                aria-label="Expand legend"
+                class="panel-toggle"
+                id="legendToggle"
+              >
+                ⌄
+              </button>
+            </div>
+            <div>
+              <span class="legend-box risk-high"> </span>
+              High Risk
+            </div>
+            <div>
+              <span class="legend-box risk-med"> </span>
+              Medium Risk
+            </div>
+            <div>
+              <span class="legend-line route"> </span>
+              Recommended Route
+            </div>
+            <div>
+              <span class="legend-line blocked"> </span>
+              Blocked Road
+            </div>
+            <div>
+              <span class="legend-point shelter"> </span>
+              Evacuation Centre
+            </div>
+            <div>
+              <span class="legend-point facility"> </span>
+              Critical Facility
+            </div>
+            <div>
+              <span class="legend-line gp-boundary"> </span>
+              Gram Panchayat
+            </div>
+          </div>
+          <div class="floating-panel emergency-menu-panel">
+            <div class="floating-title emergency-menu-title">
+              Emergency Information
+            </div>
+            <div class="emergency-menu-items">
+              <div class="emergency-menu-item">
+                <span class="plain-icon"> GP </span>
+                <span class="emergency-label"> Total No. of G.P. </span>
+                <strong class="emergency-value" id="statGP"> 0 </strong>
+              </div>
+              <div class="emergency-menu-item">
+                <span class="plain-icon"> B </span>
+                <span class="emergency-label"> Total No. of Block </span>
+                <strong class="emergency-value" id="statBlock"> 0 </strong>
+              </div>
+              <div class="emergency-menu-item">
+                <span class="plain-icon"> S </span>
+                <span class="emergency-label"> Total No. of Shelter </span>
+                <strong class="emergency-value" id="statShelter"> 0 </strong>
+              </div>
+              <div class="emergency-menu-item">
+                <span class="plain-icon"> C </span>
+                <span class="emergency-label"> Total Capacity </span>
+                <strong class="emergency-value" id="statCapacity"> 0 </strong>
+              </div>
+              <div class="emergency-menu-item">
+                <span class="plain-icon"> A </span>
+                <span class="emergency-label"> Available Capacity </span>
+                <strong class="emergency-value" id="statAvailable"> 0 </strong>
+              </div>
+              <div class="emergency-menu-item">
+                <span class="plain-icon"> EF </span>
+                <span class="emergency-label"> Emergency Facilities </span>
+                <strong class="emergency-value" id="statFacilities"> 0 </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ol-popup" id="popup">
+          <button class="popup-closer" id="popupCloser">&times;</button>
+          <div id="popupContent"></div>
+        </div>
+        <div class="scale" id="scale"></div>
+        <div class="mouse-position" id="mousePosition"></div>
+      </section>
+    </main>
+    <div class="download-modal" id="downloadModal">
+      <div class="download-dialog">
+        <div class="download-head">
+          <b> Download Map </b>
+          <button id="downloadClose">&times;</button>
+        </div>
+        <label> Block </label>
+        <select id="downloadBlock">
+          <option value="">Select Block</option>
+        </select>
+        <label> Gram Panchayat </label>
+        <select id="downloadGP">
+          <option value="">Select Gram Panchayat</option>
+        </select>
+        <div id="downloadMessage"></div>
+        <button class="primary" id="pdfDownloadBtn">Download PDF</button>
+      </div>
+    </div>
+    <footer class="bottombar">
+      <span> District Disaster Management &amp; Evacuation GIS </span>
+      <span id="coord"> Ready </span>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/ol@10.6.1/dist/ol.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
